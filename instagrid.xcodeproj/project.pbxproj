@@ -12,6 +12,8 @@
 		9AF0246A225BACA700222036 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AF02468225BACA700222036 /* Main.storyboard */; };
 		9AF0246C225BACA900222036 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9AF0246B225BACA900222036 /* Assets.xcassets */; };
 		9AF0246F225BACA900222036 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AF0246D225BACA900222036 /* LaunchScreen.storyboard */; };
+		9AF983F5225BBE09003BA41A /* Delm-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF02477225BB7F000222036 /* Delm-Medium.otf */; };
+		9AF983F6225BBE09003BA41A /* ThirstySoftRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9AF02476225BB7F000222036 /* ThirstySoftRegular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		9AF0246B225BACA900222036 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9AF0246E225BACA900222036 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9AF02470225BACA900222036 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9AF02476225BB7F000222036 /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThirstySoftRegular.otf; sourceTree = "<group>"; };
+		9AF02477225BB7F000222036 /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delm-Medium.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +39,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9AA0A651225CE877009A3050 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9AF02464225BACA700222036 /* AppDelegate.swift */,
+				9AF0246B225BACA900222036 /* Assets.xcassets */,
+				9AF0246D225BACA900222036 /* LaunchScreen.storyboard */,
+				9AF02470225BACA900222036 /* Info.plist */,
+				9AF02478225BB7F600222036 /* Fonts */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9AA0A652225CE910009A3050 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9AF02468225BACA700222036 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9AA0A653225CE937009A3050 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9AF02466225BACA700222036 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		9AF02458225BACA700222036 = {
 			isa = PBXGroup;
 			children = (
@@ -54,14 +86,20 @@
 		9AF02463225BACA700222036 /* instagrid */ = {
 			isa = PBXGroup;
 			children = (
-				9AF02464225BACA700222036 /* AppDelegate.swift */,
-				9AF02466225BACA700222036 /* ViewController.swift */,
-				9AF02468225BACA700222036 /* Main.storyboard */,
-				9AF0246B225BACA900222036 /* Assets.xcassets */,
-				9AF0246D225BACA900222036 /* LaunchScreen.storyboard */,
-				9AF02470225BACA900222036 /* Info.plist */,
+				9AA0A652225CE910009A3050 /* View */,
+				9AA0A653225CE937009A3050 /* Controller */,
+				9AA0A651225CE877009A3050 /* Supporting Files */,
 			);
 			path = instagrid;
+			sourceTree = "<group>";
+		};
+		9AF02478225BB7F600222036 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9AF02477225BB7F000222036 /* Delm-Medium.otf */,
+				9AF02476225BB7F000222036 /* ThirstySoftRegular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +163,8 @@
 				9AF0246F225BACA900222036 /* LaunchScreen.storyboard in Resources */,
 				9AF0246C225BACA900222036 /* Assets.xcassets in Resources */,
 				9AF0246A225BACA700222036 /* Main.storyboard in Resources */,
+				9AF983F5225BBE09003BA41A /* Delm-Medium.otf in Resources */,
+				9AF983F6225BBE09003BA41A /* ThirstySoftRegular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
