@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A1C10F32275D26E00ABBAE6 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1C10F22275D26E00ABBAE6 /* GridView.swift */; };
+		9AB519102275DB9300879844 /* SelectersButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB5190F2275DB9300879844 /* SelectersButtons.swift */; };
 		9AF02465225BACA700222036 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF02464225BACA700222036 /* AppDelegate.swift */; };
 		9AF02467225BACA700222036 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AF02466225BACA700222036 /* ViewController.swift */; };
 		9AF0246A225BACA700222036 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9AF02468225BACA700222036 /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A1C10F22275D26E00ABBAE6 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		9AB5190F2275DB9300879844 /* SelectersButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectersButtons.swift; sourceTree = "<group>"; };
 		9AF02461225BACA700222036 /* instagrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instagrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF02464225BACA700222036 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9AF02466225BACA700222036 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 			isa = PBXGroup;
 			children = (
 				9AF02468225BACA700222036 /* Main.storyboard */,
+				9AB5190F2275DB9300879844 /* SelectersButtons.swift */,
+				9A1C10F22275D26E00ABBAE6 /* GridView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,7 +181,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A1C10F32275D26E00ABBAE6 /* GridView.swift in Sources */,
 				9AF02467225BACA700222036 /* ViewController.swift in Sources */,
+				9AB519102275DB9300879844 /* SelectersButtons.swift in Sources */,
 				9AF02465225BACA700222036 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

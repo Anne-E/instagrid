@@ -8,79 +8,68 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GridViewDelegate, SelectersButtonsDelegate {
 
-    @IBOutlet weak var layout1Button: UIButton!
-    @IBOutlet weak var layout2Button: UIButton!
-    @IBOutlet weak var layout3Button: UIButton!
-    @IBOutlet weak var selected1Image: UIImageView!
-    @IBOutlet weak var selected2Image: UIImageView!
-    @IBOutlet weak var selected3Image: UIImageView!
-    @IBOutlet weak var layout1View: UIView!
-    @IBOutlet weak var layout2View: UIView!
-    @IBOutlet weak var layout3View: UIView!
-    @IBOutlet weak var layout1Image1: UIImageView!
-    @IBOutlet weak var layout1Image2: UIImageView!
-    @IBOutlet weak var layout1Image3: UIImageView!
+    @IBOutlet weak var layout1View: GridView!
+    @IBOutlet weak var layout2View: GridView!
+    @IBOutlet weak var layout3View: GridView!
+    
+    @IBOutlet weak var selectersButtons: SelectersButtons!
+    var gridSelected: GridView!
+
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
-    var imageToChange: UIImageView!
+    
     
     // viewDidLoad function called when viewController contents are loaded
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker.delegate = self;
-        // Do any additional setup after loading the view.
-        selected2Image.isHidden = true
-        selected3Image.isHidden = true
-        layout2View.isHidden = true
-        layout3View.isHidden = true
+        setup()
     }
-
-    @IBAction func layout1ButtonClicked(_ sender: Any) {
-        selected1Image.isHidden = false
-        selected2Image.isHidden = true
-        selected3Image.isHidden = true
-        layout1View.isHidden = false
-        layout2View.isHidden = true
-        layout3View.isHidden = true
+    
+    // This function sets up all the delegate of the layoutviews
+    // and displays only the first grid
+    func setup() {
+        imagePicker.delegate = self
+        selectersButtons.delegate = self
+        layout1View.delegate = self
+        layout2View.delegate = self
+        layout3View.delegate = self
         
+        hideAllGrid()
+        layout1View.isHidden = false
     }
     
-    @IBAction func layout2ButtonClicked(_ sender: Any) {
-        selected2Image.isHidden = false
-        selected1Image.isHidden = true
-        selected3Image.isHidden = true
-        layout2View.isHidden = false
+    // function to hide all the grids
+    
+    func hideAllGrid(){
         layout1View.isHidden = true
+        layout2View.isHidden = true
         layout3View.isHidden = true
     }
     
-    @IBAction func layout3ButtonClicked(_ sender: Any) {
-        selected3Image.isHidden = false
-        selected1Image.isHidden = true
-        selected2Image.isHidden = true
-        layout3View.isHidden = false
-        layout1View.isHidden = true
-        layout2View.isHidden = true
+    // SelectersButtonsDelegate
+    
+    // function to unhide the selected grid
+    
+    func selectGrid(_ number: Int) {
+        hideAllGrid()
+        if number == 1 {
+            layout1View.isHidden = false
+        } else if number == 2 {
+            layout2View.isHidden = false
+        } else if number == 3 {
+            layout3View.isHidden = false
+        }
     }
     
+    // GridViewDelegate
     
-    @IBAction func layout1Button1Clicked(_ sender: Any) {
-        imageToChange = layout1Image1;
-        openAlert(sender)
-    }
+    // function to open the image picker
     
-    @IBAction func layout1Button2Clicked(_ sender: Any) {
-        imageToChange = layout1Image2;
-        openAlert(sender)
-    }
-    
-    @IBAction func layout1Button3Clicked(_ sender: Any) { imageToChange = layout1Image3;
-        openAlert(sender)
-    }
-    
-    func openAlert(_ sender: Any) {
+    func openImagePicker(_ sender: Any, grid: GridView) {
+        self.gridSelected = grid
+        
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             self.openCamera()
@@ -98,6 +87,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         alert.popoverPresentationController?.permittedArrowDirections = .up
         self.show(alert, sender: self)
     }
+    
+    // function to open the camera or the gallery
     
     func openCamera(){
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
@@ -126,7 +117,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let img: UIImage = info[.originalImage] as? UIImage {
-            imageToChange.image = img;
+            gridSelected.setImage(img)
         }
         imagePicker.dismiss(animated: true, completion: nil)
     }
