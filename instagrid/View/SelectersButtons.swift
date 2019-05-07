@@ -46,7 +46,7 @@ class SelectersButtons: UIView {
         selected3Image.isHidden = true
     }
     
-    // Function that will enable the 3 buttons click
+    // Function that will enable the 3 buttons clicks
     // it will display the selected button
     // and tell the delegate (ViewController) which grid is selected
     
@@ -55,18 +55,20 @@ class SelectersButtons: UIView {
         if let button = sender as? UIButton,
             let delegate = delegate {
             hideAllButtons();
-            if (button == button1) {
+            switch button {
+            case button1:
                 selected1Image.isHidden = false
                 delegate.selectGrid(1)
-            } else if (button == button2) {
+            case button2:
                 selected2Image.isHidden = false
                 delegate.selectGrid(2)
-            } else if (button == button3) {
+            case button3:
                 selected3Image.isHidden = false
                 delegate.selectGrid(3)
-            }
+            default:
+                break
         }
-        
+        }
     }
     
 }

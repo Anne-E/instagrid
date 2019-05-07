@@ -14,6 +14,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var layout2View: GridView!
     @IBOutlet weak var layout3View: GridView!
     
+    @IBOutlet weak var swipeLabel: UILabel!
+    
     @IBOutlet weak var selectersButtons: SelectersButtons!
     var gridSelected: GridView!
 
@@ -54,12 +56,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func selectGrid(_ number: Int) {
         hideAllGrid()
-        if number == 1 {
+        switch number {
+        case 1:
             layout1View.isHidden = false
-        } else if number == 2 {
+        case 2:
             layout2View.isHidden = false
-        } else if number == 3 {
+        case 3:
             layout3View.isHidden = false
+        default:
+            break
         }
     }
     
@@ -122,5 +127,33 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
+    // to tell the system our viewController will respond to motion gestures
+    
+    override func becomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            self.view.backgroundColor = UIColor.random()
+        }
+    }
 }
 
+// Extension to add a function to an existing class
+// Generates a random float value : goal is to change the colour randomnly when shaking the IPhone
+
+extension CGFloat {
+    static func random() -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+extension UIColor {
+    static func random() -> UIColor {
+        return UIColor(red:   .random(),
+                       green: .random(),
+                       blue:  .random(),
+                       alpha: 1.0)
+    }
+}

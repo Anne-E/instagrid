@@ -17,10 +17,12 @@ class GridView: UIView {
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var image2: UIImageView!
     @IBOutlet weak var image3: UIImageView!
+    @IBOutlet weak var image4: UIImageView!
     
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
+    @IBOutlet weak var button4: UIButton!
     
     var imageToChange: UIImageView!
     
@@ -29,16 +31,21 @@ class GridView: UIView {
     // this function will determine the clicked button on the grid
     // Set imageToChange to know which image on the grid the user wants to change
     // and tell the delegate (ViewController) to open the imagePicker
-    @IBAction func ButtonClicked(_ sender: Any) {
+    @IBAction func buttonClicked(_ sender: Any) {
         
         if let button = sender as? UIButton {
         
-            if button == button1 {
+            switch button {
+            case button1:
                 imageToChange = image1
-            } else if button == button2 {
+            case button2:
                 imageToChange = image2
-            } else if button == button3 {
+            case button3:
                 imageToChange = image3
+            case button4:
+                imageToChange = image4
+            default:
+                break
             }
             
             if let delegate = delegate {
