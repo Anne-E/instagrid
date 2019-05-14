@@ -8,20 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GridViewDelegate, SelectersButtonsDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GridViewDelegate {
 
-    @IBOutlet weak var layout1View: GridView!
-    @IBOutlet weak var layout2View: GridView!
-    @IBOutlet weak var layout3View: GridView!
-    
+    @IBOutlet weak var contentView: ContentView!
     @IBOutlet weak var swipeLabel: UILabel!
-    
-    @IBOutlet weak var selectersButtons: SelectersButtons!
-    var gridSelected: GridView!
 
-    
+    var gridSelected: GridView!
     var imagePicker: UIImagePickerController = UIImagePickerController()
     
+    var swipeUpRecognizer: UISwipeGestureRecognizer?
     
     // viewDidLoad function called when viewController contents are loaded
     override func viewDidLoad() {
@@ -33,39 +28,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // and displays only the first grid
     func setup() {
         imagePicker.delegate = self
-        selectersButtons.delegate = self
-        layout1View.delegate = self
-        layout2View.delegate = self
-        layout3View.delegate = self
+        contentView.setup()
+        contentView.delegate = self
         
-        hideAllGrid()
-        layout1View.isHidden = false
-    }
-    
-    // function to hide all the grids
-    
-    func hideAllGrid(){
-        layout1View.isHidden = true
-        layout2View.isHidden = true
-        layout3View.isHidden = true
-    }
-    
-    // SelectersButtonsDelegate
-    
-    // function to unhide the selected grid
-    
-    func selectGrid(_ number: Int) {
-        hideAllGrid()
-        switch number {
-        case 1:
-            layout1View.isHidden = false
-        case 2:
-            layout2View.isHidden = false
-        case 3:
-            layout3View.isHidden = false
-        default:
-            break
+        swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeUp(swipeRecognizer:)))
+        
+        if let swipeUpRecognizer = swipeUpRecognizer {
+            swipeUpRecognizer.direction = .up
+            self.view.addGestureRecognizer(swipeUpRecognizer)
         }
+    }
+    
+    @objc func swipeUp(swipeRecognizer: UISwipeGestureRecognizer) {
+        
+        if let imageToShare: UIImage = contentView.selectedLayout?.asImage() {
+            // set up activity view controller
+            let toShare = [ imageToShare ]
+            let activityViewController = UIActivityViewController(activityItems: toShare, applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            
+            // present the view controller
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+        
     }
     
     // GridViewDelegate
@@ -140,20 +125,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 }
 
-// Extension to add a function to an existing class
-// Generates a random float value : goal is to change the colour randomnly when shaking the IPhone
 
-extension CGFloat {
-    static func random() -> CGFloat {
-        return CGFloat(arc4random()) / CGFloat(UInt32.max)
-    }
-}
 
-extension UIColor {
-    static func random() -> UIColor {
-        return UIColor(red:   .random(),
-                       green: .random(),
-                       blue:  .random(),
-                       alpha: 1.0)
-    }
-}
+
