@@ -254,7 +254,7 @@
                                                     <constraint firstAttribute="width" constant="45" id="Qo1-NG-66w"/>
                                                     <constraint firstAttribute="height" constant="49" id="WXg-Kk-Qje"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="Plus"/>
+                                                <state key="normal" image="Plus"/>
                                                 <connections>
                                                     <action selector="buttonClicked:" destination="p1D-Ga-JUE" eventType="touchUpInside" id="XpH-Ls-hZd"/>
                                                 </connections>
@@ -265,7 +265,7 @@
                                                     <constraint firstAttribute="width" constant="45" id="qw6-Nj-8pH"/>
                                                     <constraint firstAttribute="height" constant="49" id="uKK-oC-b6w"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="Plus"/>
+                                                <state key="normal" image="Plus"/>
                                                 <connections>
                                                     <action selector="buttonClicked:" destination="p1D-Ga-JUE" eventType="touchUpInside" id="3PO-zf-OQg"/>
                                                 </connections>
@@ -276,7 +276,7 @@
                                                     <constraint firstAttribute="width" constant="45" id="Lgj-DQ-yn0"/>
                                                     <constraint firstAttribute="height" constant="49" id="MTj-31-UND"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="Plus"/>
+                                                <state key="normal" image="Plus"/>
                                                 <connections>
                                                     <action selector="buttonClicked:" destination="p1D-Ga-JUE" eventType="touchUpInside" id="6IQ-vc-L1g"/>
                                                 </connections>
@@ -395,7 +395,7 @@
                                                     <constraint firstAttribute="width" constant="45" id="AjO-Xd-w4f"/>
                                                     <constraint firstAttribute="height" constant="49" id="LCe-XZ-Qkg"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="Plus"/>
+                                                <state key="normal" image="Plus"/>
                                                 <connections>
                                                     <action selector="buttonClicked:" destination="1Bw-al-Rwk" eventType="touchUpInside" id="YB2-hx-jhz"/>
                                                 </connections>
@@ -406,7 +406,7 @@
                                                     <constraint firstAttribute="height" constant="49" id="EqY-Yc-lCW"/>
                                                     <constraint firstAttribute="width" constant="45" id="mN8-uT-3Es"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="Plus"/>
+                                                <state key="normal" image="Plus"/>
                                                 <connections>
                                                     <action selector="buttonClicked:" destination="1Bw-al-Rwk" eventType="touchUpInside" id="3IZ-I3-h7u"/>
                                                 </connections>
@@ -417,7 +417,7 @@
                                                     <constraint firstAttribute="width" constant="45" id="BlK-xm-xNl"/>
                                                     <constraint firstAttribute="height" constant="49" id="Ih1-bE-SLO"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="Plus"/>
+                                                <state key="normal" image="Plus"/>
                                                 <connections>
                                                     <action selector="buttonClicked:" destination="1Bw-al-Rwk" eventType="touchUpInside" id="VQA-WX-8WN"/>
                                                 </connections>
@@ -428,7 +428,7 @@
                                                     <constraint firstAttribute="width" constant="45" id="IHO-tw-EA2"/>
                                                     <constraint firstAttribute="height" constant="49" id="Yya-8l-Liz"/>
                                                 </constraints>
-                                                <state key="normal" title="Button" image="Plus"/>
+                                                <state key="normal" image="Plus"/>
                                                 <connections>
                                                     <action selector="buttonClicked:" destination="1Bw-al-Rwk" eventType="touchUpInside" id="btV-c4-htk"/>
                                                 </connections>
@@ -635,7 +635,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="up" id="B7A-GO-awo"/>
             </objects>
-            <point key="canvasLocation" x="373.60000000000002" y="-804.64767616191909"/>
+            <point key="canvasLocation" x="718" y="-546"/>
         </scene>
     </scenes>
     <resources>
