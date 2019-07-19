@@ -24,14 +24,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         setup()
     }
     
-    // This function sets up all the delegate of the layoutviews
+    // This function sets up all the delegates of the layoutviews
     // and displays only the first grid
     func setup() {
         imagePicker.delegate = self
         contentView.setup()
         contentView.delegate = self
         
+        // Init the gesture Recognizer and set the receiver to self.swipeUp()
+        
         swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeUp(swipeRecognizer:)))
+        
+        // If init works set the direction of the swipe and
+        // Add the gesture recognizer on the view we want to be swipable on
         
         if let swipeUpRecognizer = swipeUpRecognizer {
             swipeUpRecognizer.direction = .up
@@ -39,10 +44,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    //swipeUp gives choices to the user : which image to choose and share
     @objc func swipeUp(swipeRecognizer: UISwipeGestureRecognizer) {
         
         if let imageToShare: UIImage = contentView.selectedLayout?.asImage() {
-            // set up activity view controller
+            // set up activity of viewController
             let toShare = [ imageToShare ]
             let activityViewController = UIActivityViewController(activityItems: toShare, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
@@ -53,9 +59,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
     }
     
-    // GridViewDelegate
-    
-    // function to open the image picker
+     //GridViewDelegate
+    // method called because class ViewController conforms to GridView Delegate.
     
     func openImagePicker(_ sender: Any, grid: GridView) {
         self.gridSelected = grid
@@ -81,43 +86,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     // function to open the camera or the gallery
     
     func openCamera(){
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
-        {
-            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+        if(UIImagePickerController.isSourceTypeAvailable(.camera)){
+            imagePicker.sourceType = .camera
             imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
-        }
-        else
-        {
-            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+            
+        }else{
+            let alert = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
     }
     
     func openGallery(){
-        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    // ImagePickerDelegate
-    // We specify the behavior of the imagePicker by being its delegate
-    // So we can control what happens when the user finishes to select a media in the imagePicker
+    //UIImagePickerControllerDelegate
+    // method called because class ViewController conforms to UIImagePickerControllerDelegate
+    // decide what happens when the user finishes to select a media in the imagePicker
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo
+                                info: [UIImagePickerController.InfoKey : Any]) {
         if let img: UIImage = info[.originalImage] as? UIImage {
             gridSelected.setImage(img)
         }
-        imagePicker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
     }
     
-    // to tell the system our viewController will respond to motion gestures
+    // method that tells the system the viewController will respond to motion gestures
     
     override func becomeFirstResponder() -> Bool {
         return true
     }
-    
+    // change of background color when shaking the phone
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             self.view.backgroundColor = UIColor.random()

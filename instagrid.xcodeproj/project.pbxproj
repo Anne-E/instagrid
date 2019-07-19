@@ -56,9 +56,9 @@
 		9A89FB6C2288A5B700544B60 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				9A1697F422D3D40900B3957B /* UIView+Extension.swift */,
 				9A89FB682288A55800544B60 /* CGFloat+Extension.swift */,
 				9A89FB6A2288A59500544B60 /* UIColor+Extension.swift */,
-				9A1697F422D3D40900B3957B /* UIView+Extension.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -79,9 +79,9 @@
 			isa = PBXGroup;
 			children = (
 				9AF02468225BACA700222036 /* Main.storyboard */,
-				9A89FB662288A2B800544B60 /* ContentView.swift */,
 				9AB5190F2275DB9300879844 /* SelectersButtons.swift */,
 				9A1C10F22275D26E00ABBAE6 /* GridView.swift */,
+				9A89FB662288A2B800544B60 /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -114,9 +114,9 @@
 		9AF02463225BACA700222036 /* instagrid */ = {
 			isa = PBXGroup;
 			children = (
-				9A89FB6C2288A5B700544B60 /* Tools */,
 				9AA0A652225CE910009A3050 /* View */,
 				9AA0A653225CE937009A3050 /* Controller */,
+				9A89FB6C2288A5B700544B60 /* Tools */,
 				9AA0A651225CE877009A3050 /* Supporting Files */,
 			);
 			path = instagrid;
