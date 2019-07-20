@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol GridViewDelegate {
+protocol GridViewDelegate: class {
     func openImagePicker(_ sender: Any, grid: GridView)
 }
 
@@ -26,7 +26,7 @@ class GridView: UIView {
     
     var imageToChange: UIImageView!
     
-    var delegate: GridViewDelegate?
+    weak var delegate: GridViewDelegate?
     
     // this function will determine the clicked button on the grid
     // Set imageToChange to know which image on the grid the user wants to change
@@ -45,11 +45,11 @@ class GridView: UIView {
             case button4:
                 imageToChange = image4
             default:
-                break
+                return
             }
             
             if let delegate = delegate {
-                delegate.openImagePicker(button, grid: self)
+                delegate.openImagePicker(sender, grid: self)
             }
         }
     }

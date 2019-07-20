@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol SelectersButtonsDelegate {
+protocol SelectersButtonsDelegate : class {
     func selectGrid(_ number: Int)
 }
 
@@ -23,7 +23,7 @@ class SelectersButtons: UIView {
     @IBOutlet weak var button2: UIButton!
     @IBOutlet weak var button3: UIButton!
     
-    var delegate : SelectersButtonsDelegate?
+    weak var delegate : SelectersButtonsDelegate?
 
 
     // this function is called when selectersButton appears on the app
@@ -46,7 +46,7 @@ class SelectersButtons: UIView {
         selected3Image.isHidden = true
     }
     
-    // Function that will enable the 3 buttons clicks
+    // Function that will manage the 3 buttons clicks
     // it will display the selected button
     // and tell the delegate (ViewController) which grid is selected
     

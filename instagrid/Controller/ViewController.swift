@@ -15,7 +15,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     var gridSelected: GridView!
     var imagePicker: UIImagePickerController = UIImagePickerController()
-    
     var swipeUpRecognizer: UISwipeGestureRecognizer?
     
     // viewDidLoad function called when viewController contents are loaded
@@ -66,6 +65,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.gridSelected = grid
         
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        
         alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             self.openCamera()
         }))
@@ -76,14 +76,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
-        
-        alert.popoverPresentationController?.sourceView = sender as? UIView
-        alert.popoverPresentationController?.sourceRect = (sender as AnyObject).bounds
-        alert.popoverPresentationController?.permittedArrowDirections = .up
         self.show(alert, sender: self)
     }
     
-    // function to open the camera or the gallery
+    // method to open the camera or the gallery
     
     func openCamera(){
         if(UIImagePickerController.isSourceTypeAvailable(.camera)){
@@ -91,8 +87,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
             
-        }else{
-            let alert = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+        } else{
+            let alert = UIAlertController(title: "Warning", message: "You don't have a camera", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
@@ -123,7 +119,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     // change of background color when shaking the phone
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
+        if motion ==  .motionShake {
             self.view.backgroundColor = UIColor.random()
         }
     }

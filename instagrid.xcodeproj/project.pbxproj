@@ -79,9 +79,9 @@
 			isa = PBXGroup;
 			children = (
 				9AF02468225BACA700222036 /* Main.storyboard */,
-				9AB5190F2275DB9300879844 /* SelectersButtons.swift */,
-				9A1C10F22275D26E00ABBAE6 /* GridView.swift */,
 				9A89FB662288A2B800544B60 /* ContentView.swift */,
+				9A1C10F22275D26E00ABBAE6 /* GridView.swift */,
+				9AB5190F2275DB9300879844 /* SelectersButtons.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

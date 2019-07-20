@@ -19,22 +19,20 @@ class ContentView: UIView, GridViewDelegate, SelectersButtonsDelegate
     
     @IBOutlet weak var selectersButtons: SelectersButtons!
     
-    var delegate: GridViewDelegate?
+    weak var delegate: GridViewDelegate?
     
     func setup() {
+        
         selectersButtons.delegate = self
         layout1View.delegate = self
         layout2View.delegate = self
         layout3View.delegate = self
         
-        hideAllGrid()
-        layout1View.isHidden = false
-        selectedLayout = layout1View
+        selectGrid(1)
     }
     
     // SelectersButtonsDelegate
-    
-    // function to unhide the selected grid
+   // function to unhide the selected grid
     
     func selectGrid(_ number: Int) {
         hideAllGrid()

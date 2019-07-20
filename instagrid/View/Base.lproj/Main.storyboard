@@ -75,7 +75,7 @@
                                     <outletCollection property="gestureRecognizers" destination="B7A-GO-awo" appends="YES" id="dh4-6h-Vvk"/>
                                 </connections>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMW-Br-Xsl" customClass="ContentView" customModule="instagrid" customModuleProvider="target">
+                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMW-Br-Xsl" customClass="ContentView" customModule="instagrid" customModuleProvider="target">
                                 <rect key="frame" x="9.5" y="163" width="356" height="504"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gLq-ws-mPL" customClass="GridView" customModule="instagrid" customModuleProvider="target">
@@ -231,7 +231,7 @@
                                             <outlet property="image3" destination="GGE-Hr-AYH" id="vua-OA-omj"/>
                                         </connections>
                                     </view>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1D-Ga-JUE" customClass="GridView" customModule="instagrid" customModuleProvider="target">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1D-Ga-JUE" customClass="GridView" customModule="instagrid" customModuleProvider="target">
                                         <rect key="frame" x="28" y="20" width="300" height="304"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93a-1w-tbn">
