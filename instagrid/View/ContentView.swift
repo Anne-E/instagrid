@@ -59,7 +59,7 @@ class ContentView: UIView, GridViewDelegate, SelectersButtonsDelegate
         layout3View.isHidden = true
     }
     
-    
+    // GridViewDelegate
     func openImagePicker(_ sender: Any, grid: GridView) {
         if let delegate = delegate {
             delegate.openImagePicker(sender, grid: grid)
