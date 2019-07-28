@@ -46,5 +46,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To import or save image from your library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To take photo and add it on instagrid</string>
 </dict>
 </plist>

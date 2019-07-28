@@ -13,14 +13,52 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var contentView: ContentView!
     @IBOutlet weak var swipeLabel: UILabel!
 
+    @IBOutlet weak var topContentViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomContentViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var rightContentViewConstraint: NSLayoutConstraint!
+    
     var gridSelected: GridView!
     var imagePicker: UIImagePickerController = UIImagePickerController()
-    var swipeUpRecognizer: UISwipeGestureRecognizer?
+    var swipeRecognizer: UISwipeGestureRecognizer?
     
     // viewDidLoad function called when viewController contents are loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    // viewWillTransition function called when viewController orientation changed
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        setupSwipe()
+    }
+    
+    // Function setupSwipe to create and add the swipe gesture rocgnizer (delete previous one if already exist)
+    func setupSwipe() {
+        
+        // If swipe gesture rocgnizer already exist remove it
+        
+        if let swipeRecognizer = swipeRecognizer {
+            self.view.removeGestureRecognizer(swipeRecognizer)
+        }
+        
+        // Init the gesture Recognizer and set the receiver to self.swipeUp()
+        
+        swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swiped(swipeRecognizer:)))
+        
+        // If init works set the direction of the swipe depending on the orientation of the device and
+        // Add the gesture recognizer on the view we want to be swipable on
+        
+        if let swipeRecognizer = swipeRecognizer {
+            if UIDevice.current.orientation.isLandscape {
+                swipeRecognizer.direction = .left
+                swipeLabel.text = "Swipe left to share"
+            } else {
+                swipeRecognizer.direction = .up
+                swipeLabel.text = "Swipe up to share"
+            }
+            self.view.addGestureRecognizer(swipeRecognizer)
+        }
     }
     
     // This function sets up all the delegates of the layoutviews
@@ -29,22 +67,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         contentView.setup()
         contentView.delegate = self
-        
-        // Init the gesture Recognizer and set the receiver to self.swipeUp()
-        
-        swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeUp(swipeRecognizer:)))
-        
-        // If init works set the direction of the swipe and
-        // Add the gesture recognizer on the view we want to be swipable on
-        
-        if let swipeUpRecognizer = swipeUpRecognizer {
-            swipeUpRecognizer.direction = .up
-            self.view.addGestureRecognizer(swipeUpRecognizer)
-        }
+        setupSwipe()
     }
     
     //swipeUp gives choices to the user : which image to choose and share
-    @objc func swipeUp(swipeRecognizer: UISwipeGestureRecognizer) {
+    @objc func swiped(swipeRecognizer: UISwipeGestureRecognizer) {
         
         if let imageToShare: UIImage = contentView.selectedLayout?.asImage() {
             // set up activity of viewController
@@ -52,8 +79,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let activityViewController = UIActivityViewController(activityItems: toShare, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             
+            // We set the completion of the activityViewController to have our code called when the share is finished
+            
+            activityViewController.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
+                // We set the constraint constant to their previous value
+                if UIDevice.current.orientation.isLandscape {
+                    self.rightContentViewConstraint.constant = 0
+                 } else {
+                    self.topContentViewConstraint.constant = 17
+                    self.bottomContentViewConstraint.isActive = true
+                }
+                    UIView.animate(withDuration: 0.5, animations: {
+                        // This ask the view to be relayout (Position Update)
+                        self.view.layoutIfNeeded()
+                    })
+            }
+            
+            // We set the constraint constant to negative value of the screen size to make the grid go outside of the screen
+            
+            if UIDevice.current.orientation.isLandscape {
+                self.rightContentViewConstraint.constant = UIScreen.main.bounds.width * -1
+            } else {
+                self.topContentViewConstraint.constant = UIScreen.main.bounds.height * -1
+                self.bottomContentViewConstraint.isActive = false
+            }
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                // This ask the view to be relayout (Position Update)
+                self.view.layoutIfNeeded()
+            }) { completed in
+                if completed {
+                    self.present(activityViewController, animated: true, completion: nil)
+                }
+            }
+            
             // present the view controller
-            self.present(activityViewController, animated: true, completion: nil)
+            
         }
         
     }
@@ -97,7 +158,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func openGallery(){
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
-        self.present(imagePicker, animated: true, completion: nil)
+        self.present(self.imagePicker, animated: true, completion: nil)
     }
     
     //UIImagePickerControllerDelegate
