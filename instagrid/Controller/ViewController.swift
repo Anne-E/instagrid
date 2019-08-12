@@ -15,7 +15,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBOutlet weak var topContentViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomContentViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var rightContentViewConstraint: NSLayoutConstraint!
+	
+	@IBOutlet weak var leftContentViewConstraint: NSLayoutConstraint!
+	@IBOutlet weak var rightContentViewConstraint: NSLayoutConstraint!
     
     var gridSelected: GridView!
     var imagePicker: UIImagePickerController = UIImagePickerController()
@@ -26,17 +28,24 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         super.viewDidLoad()
         setup()
     }
-    
-    // viewWillTransition function called when viewController orientation changed
+    // This function sets up all the delegates of the layoutviews
+    // and displays only the first grid
+    func setup() {
+        imagePicker.delegate = self
+        contentView.setup()
+        contentView.delegate = self
+        setupSwipe()
+    }
+    // viewWillTransition function called when viewController orientation changes
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         setupSwipe()
     }
     
-    // Function setupSwipe to create and add the swipe gesture rocgnizer (delete previous one if already exist)
+    // Function setupSwipe to create and add the swipe gesture recognizer (delete previous one if already exist)
     func setupSwipe() {
         
-        // If swipe gesture rocgnizer already exist remove it
+        // If swipe gesture recognizer already exists remove it
         
         if let swipeRecognizer = swipeRecognizer {
             self.view.removeGestureRecognizer(swipeRecognizer)
@@ -61,36 +70,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
-    // This function sets up all the delegates of the layoutviews
-    // and displays only the first grid
-    func setup() {
-        imagePicker.delegate = self
-        contentView.setup()
-        contentView.delegate = self
-        setupSwipe()
-    }
     
-    //swipeUp gives choices to the user : which image to choose and share
+    //swiped gives choices to the user : which services to use to share selected images
     @objc func swiped(swipeRecognizer: UISwipeGestureRecognizer) {
         
         if let imageToShare: UIImage = contentView.selectedLayout?.asImage() {
-            // set up activity of viewController
+            
+            // set up activity of viewController + display standard services offered from app
             let toShare = [ imageToShare ]
             let activityViewController = UIActivityViewController(activityItems: toShare, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
             
             // We set the completion of the activityViewController to have our code called when the share is finished
-            
+
             activityViewController.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
                 // We set the constraint constant to their previous value
                 if UIDevice.current.orientation.isLandscape {
                     self.rightContentViewConstraint.constant = 0
+					self.leftContentViewConstraint.isActive = true
                  } else {
                     self.topContentViewConstraint.constant = 17
                     self.bottomContentViewConstraint.isActive = true
                 }
-                    UIView.animate(withDuration: 0.5, animations: {
-                        // This ask the view to be relayout (Position Update)
+                    UIView.animate(withDuration: 0.50, animations: {
+                        // This asks the view to be "relayout" (Position Update)
                         self.view.layoutIfNeeded()
                     })
             }
@@ -99,21 +102,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             
             if UIDevice.current.orientation.isLandscape {
                 self.rightContentViewConstraint.constant = UIScreen.main.bounds.width * -1
+				self.leftContentViewConstraint.isActive = false
             } else {
                 self.topContentViewConstraint.constant = UIScreen.main.bounds.height * -1
                 self.bottomContentViewConstraint.isActive = false
             }
             
-            UIView.animate(withDuration: 0.5, animations: {
-                // This ask the view to be relayout (Position Update)
+            UIView.animate(withDuration: 0.50, animations: {
+                // This asks the view to be relayout (Position Update)
                 self.view.layoutIfNeeded()
             }) { completed in
                 if completed {
+                    //presents the viewController
                     self.present(activityViewController, animated: true, completion: nil)
                 }
             }
-            
-            // present the view controller
             
         }
         
@@ -140,7 +143,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.show(alert, sender: self)
     }
     
-    // method to open the camera or the gallery
+    // methods to open the camera or the gallery
     
     func openCamera(){
         if(UIImagePickerController.isSourceTypeAvailable(.camera)){
@@ -163,7 +166,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //UIImagePickerControllerDelegate
     // method called because class ViewController conforms to UIImagePickerControllerDelegate
-    // decide what happens when the user finishes to select a media in the imagePicker
+    // decides what happens when the user finishes to select a media in the imagePicker
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo
                                 info: [UIImagePickerController.InfoKey : Any]) {
