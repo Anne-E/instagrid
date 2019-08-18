@@ -12,18 +12,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBOutlet weak var contentView: ContentView!
     @IBOutlet weak var swipeLabel: UILabel!
-
-    @IBOutlet weak var topContentViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomContentViewConstraint: NSLayoutConstraint!
-	
-	@IBOutlet weak var leftContentViewConstraint: NSLayoutConstraint!
-	@IBOutlet weak var rightContentViewConstraint: NSLayoutConstraint!
     
     var gridSelected: GridView!
     var imagePicker: UIImagePickerController = UIImagePickerController()
     var swipeRecognizer: UISwipeGestureRecognizer?
     
-    // viewDidLoad function called when viewController contents are loaded
+	@IBOutlet weak var layoutView: UIView!
+	// viewDidLoad function called when viewController contents are loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -84,33 +79,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             // We set the completion of the activityViewController to have our code called when the share is finished
 
             activityViewController.completionWithItemsHandler = { (activityType, completed:Bool, returnedItems:[Any]?, error: Error?) in
-                // We set the constraint constant to their previous value
-                if UIDevice.current.orientation.isLandscape {
-                    self.rightContentViewConstraint.constant = 0
-					self.leftContentViewConstraint.isActive = true
-                 } else {
-                    self.topContentViewConstraint.constant = 17
-                    self.bottomContentViewConstraint.isActive = true
-                }
-                    UIView.animate(withDuration: 0.50, animations: {
-                        // This asks the view to be "relayout" (Position Update)
-                        self.view.layoutIfNeeded()
-                    })
+				
+                UIView.animate(withDuration: 0.50, animations: {
+					self.layoutView.transform = .identity
+                })
             }
-            
-            // We set the constraint constant to negative value of the screen size to make the grid go outside of the screen
-            
-            if UIDevice.current.orientation.isLandscape {
-                self.rightContentViewConstraint.constant = UIScreen.main.bounds.width * -1
-				self.leftContentViewConstraint.isActive = false
-            } else {
-                self.topContentViewConstraint.constant = UIScreen.main.bounds.height * -1
-                self.bottomContentViewConstraint.isActive = false
-            }
-            
+
             UIView.animate(withDuration: 0.50, animations: {
-                // This asks the view to be relayout (Position Update)
-                self.view.layoutIfNeeded()
+				if UIDevice.current.orientation.isLandscape {
+					self.layoutView.transform = CGAffineTransform(translationX: -2000, y: 0)
+				} else {
+					self.layoutView.transform = CGAffineTransform(translationX: 0, y: -2000)
+				}
+				
             }) { completed in
                 if completed {
                     //presents the viewController
