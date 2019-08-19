@@ -12,12 +12,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBOutlet weak var contentView: ContentView!
     @IBOutlet weak var swipeLabel: UILabel!
-    
+    @IBOutlet weak var layoutView: UIView!
+
     var gridSelected: GridView!
     var imagePicker: UIImagePickerController = UIImagePickerController()
     var swipeRecognizer: UISwipeGestureRecognizer?
     
-	@IBOutlet weak var layoutView: UIView!
 	// viewDidLoad function called when viewController contents are loaded
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,7 +104,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
      //GridViewDelegate
-    // method called because class ViewController conforms to GridView Delegate.
+    // method called because class ViewController conforms to GridView Delegate 
     
     func openImagePicker(_ sender: Any, grid: GridView) {
         self.gridSelected = grid
@@ -124,7 +124,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.show(alert, sender: self)
     }
     
-    // methods to open the camera or the gallery
+    // methods called to open the camera or the gallery
     
     func openCamera(){
         if(UIImagePickerController.isSourceTypeAvailable(.camera)){
